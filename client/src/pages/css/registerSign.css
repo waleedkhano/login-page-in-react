@@ -1,0 +1,36 @@
+.container h1{
+margin: 10px;}
+input{
+    width:60%;
+    height: 40px;
+    border-radius: 8px;
+    padding-left: 15px ;
+    border: 2px solid white;
+    outline: none;
+    background:transparent;
+    margin: 5px;
+  }
+  input::placeholder{
+    color: white;
+  }
+.btn{
+  display: flex;
+  align-items: center;
+}
+.btn a{
+  text-decoration: none;
+  color: white;
+  margin-left: 20px;
+
+}
+ button{
+  width: 30%;
+  height: 5vh;
+  background-color: rgb(0, 194, 155);
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+ }
+
+
+

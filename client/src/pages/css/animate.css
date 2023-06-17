@@ -1,0 +1,24 @@
+
+.image {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-image: url(../images/bg01.jpg);
+    background-size: cover;
+    animation: animate alternate-reverse 10s forwards infinite running ease-in-out;
+    filter: brightness(0.4);
+  }
+  
+  @keyframes animate{
+    0%{
+        background-image: url(../images/bg01.jpg);
+    }
+    50%{
+        background-image: url(../images/bg02.jpg);
+    }
+    100%{
+        background-image: url(../images/bg03.jpg);
+    }
+  }
