@@ -1,38 +1,22 @@
 import { useState } from 'react';
 import './css/registerSign.css';
-import { Link, useNavigate } from 'react-router-dom';
-import axios from 'axios';
-import { toast } from 'react-hot-toast';
+import { Link } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { login } from '../redux/action';
 
 const Signin = () => {
-  const navigate = useNavigate();
 
   const [data, setData] = useState({
     email: '',
     password: ''
   });
+  const dispatch = useDispatch()
 
   const signUser = async (e) => {
     e.preventDefault();
-
-    const { email, password } = data;
-    try {
-      const response = await axios.post('/user/signin', {
-        email,
-        password
-      });
-
-      const { data } = response;
-      if (data.error) {
-        toast.error(data.error);
-      } else {
-        setData({});
-        navigate('/welcome');
-      }
-    } catch (error) {
-      console.log(error);
-      toast.error('An error occurred. Please try again.');
-    }
+    const {email, password} = data;
+    dispatch(login(email, password))
+  
   };
 
   return (
@@ -40,7 +24,7 @@ const Signin = () => {
       <div className="image"></div>
       <div className="container">
         <h1>Sign in</h1>
-        <form action="" onSubmit={signUser}>
+        <form action="POST" onSubmit={signUser}>
           <input
             type="email"
             placeholder="Email Address"

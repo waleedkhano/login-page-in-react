@@ -1,52 +1,21 @@
 import './css/registerSign.css';
 import { Link } from 'react-router-dom';
 import { useState } from 'react';
-import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
-import toast from 'react-hot-toast';
+import { useDispatch } from 'react-redux';
+import { registerForm } from '../redux/action';
 
 const Register = () => {
-  const navigate = useNavigate();
+  const dispatch = useDispatch();
 
-  const [data, setData] = useState({
-    name: '',
-    email: '',
-    password: '',
-  });
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
 
   const registerUser = async (e) => {
     e.preventDefault();
-  
-    const { name, email, password } = data;
-  
-    try {
-      const response = await axios.post('/user/register', {
-        name,
-        email,
-        password
-      });
-  
-      const responseData = response.data;
-  
-      if (responseData.error) {
-        toast.error(responseData.error);
-      } else {
-        setData((prevData) => ({
-          ...prevData,
-          name: '',
-          email: '',
-          password: ''
-        }));
-  
-        toast.success('Account has been created successfully');
-        navigate('/welcome');
-      }
-    } catch (error) {
-      console.log(error);
-    }
+
+    dispatch(registerForm(name, email, password));
   };
-  
-  
 
   return (
     <>
@@ -57,27 +26,27 @@ const Register = () => {
           <input
             type="text"
             placeholder="Name"
-            value={data.name}
-            onChange={(e) => setData({ ...data, name: e.target.value })}
+            value={name}
+            onChange={(e) => setName(e.target.value)}
           />
 
           <input
             type="email"
             placeholder="Email Address"
-            value={data.email}
-            onChange={(e) => setData({ ...data, email: e.target.value })}
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
           />
 
           <input
             type="password"
             placeholder="Password"
-            value={data.password}
-            onChange={(e) => setData({ ...data, password: e.target.value })}
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
           />
 
           <div className="btn">
             <button type="submit">Create account</button>
-            <Link to="/signin">Already have an account</Link>
+            <Link to="/login">Already have an account</Link>
           </div>
         </form>
       </div>
